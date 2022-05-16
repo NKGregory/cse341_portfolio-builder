@@ -12,7 +12,7 @@ const initDatatbase = () => {
   MongoClient.connect(process.env.MONGODB_URI, (err, client) => {
     if (err) throw err;
     _client = client;
-    _collection = _client.db('porfolio-builder').collection('users');
+    _collection = _client.db('portfolio-builder').collection('users');
     console.log('DB Connected Successfully');
   });
 };
