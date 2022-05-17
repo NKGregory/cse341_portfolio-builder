@@ -1,0 +1,44 @@
+//LOCALHOST
+
+//Get all Users
+GET http://localhost:3000/users
+###
+
+//Get One Contact by ID
+GET http://localhost:3000/users/6281bc2eaf48f464780a6dd2
+###
+
+//Add User
+POST http://localhost:3000/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"Nate",
+    "password":"Gregory"
+}
+
+###
+
+//Change Contact by ID
+PUT http://localhost:3000/users/6281bc2eaf48f464780a6dd2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"Nate",
+    "password":"1234"
+}
+
+###
+
+//Delete Contact by ID
+DELETE http://localhost:3000/users/6281bc2eaf48f464780a6dd2 HTTP/1.1
+
+###
+
+
+
+//PRODUCTION DEPLOY
+
+//Get all Contacts
+GET https://cse341-ngregory-portfolio.herokuapp.com/users
+###
