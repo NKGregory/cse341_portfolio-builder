@@ -42,3 +42,33 @@ DELETE http://localhost:3000/users/6283048a9b858b4d899348e0 HTTP/1.1
 //Get all Contacts
 GET https://cse341-ngregory-portfolio.herokuapp.com/users
 ###
+//Get One Contact by ID
+GET https://cse341-ngregory-portfolio.herokuapp.com/users/6281bc2eaf48f464780a6dd2
+###
+
+//Add User
+POST https://cse341-ngregory-portfolio.herokuapp.com/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"Nate",
+    "password":"Gregory"
+}
+
+###
+
+//Change Contact by ID
+PUT https://cse341-ngregory-portfolio.herokuapp.com/users/62830c31d105c040c351b515 HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"Nate",
+    "password":"1234"
+}
+
+###
+
+//Delete Contact by ID
+DELETE https://cse341-ngregory-portfolio.herokuapp.com/users/62830c31d105c040c351b515 HTTP/1.1
+
+###

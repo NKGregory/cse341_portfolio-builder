@@ -14,13 +14,13 @@ routes.get('/', (_req, res) => {
 });
 
 //Get One Contact
-routes.get('/:id', (_req, res) => {
-  const userId = new OjectId(_req.params.id);
+routes.get('/:id', (req, res) => {
+  const userId = new OjectId(req.params.id);
   const results = connect.getCollection().find({ _id: userId });
 
   results.toArray().then((documents) => {
     res.status(200).json(documents[0]);
-    console.log(`Returned Contact ${_req.params.id}`);
+    console.log(`Returned Contact ${req.params.id}`);
   });
 });
 
