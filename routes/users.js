@@ -52,7 +52,7 @@ routes.put('/:id', (_req, _res) => {
 //Delete Contact by ID
 routes.delete('/:id', (_req, _res) => {
     const deleteId = new OjectId(_req.params.id);
-    const results = connect.getCollection().remove({ _id: deleteId },true);
+    const results = connect.getCollection().deleteOne({ _id: deleteId },true);
     results.then((documents) => {
         _res.status(203).json(documents);
         console.log(`Deleted User Id: ${deleteId}`);

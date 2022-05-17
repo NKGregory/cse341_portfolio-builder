@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "nodemon index.jsnpm",
+    "start": "node index.js",
+    "swagger": "node ./swagger.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "mongodb": "^4.6.0"
+    "mongodb": "^4.6.0",
+    "swagger-ui-express": "^4.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16",
+    "swagger-autogen": "^2.21.1"
   }
 }
