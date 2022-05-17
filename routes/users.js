@@ -13,7 +13,7 @@ routes.get('/', (_req, res) => {
   });
 });
 
-//Get One Contact
+//Get One User
 routes.get('/:id', (req, res) => {
   const userId = new OjectId(req.params.id);
   const results = connect.getCollection().find({ _id: userId });
@@ -36,7 +36,7 @@ routes.post('/', (_req, _res) => {
     })
 });
 
-//Put JSON to Contact by ID
+//Replace User by ID
 routes.put('/:id', (_req, _res) => {
     const putId = new OjectId(_req.params.id);
     const user = {
@@ -49,7 +49,7 @@ routes.put('/:id', (_req, _res) => {
     });
 });
 
-//Delete Contact by ID
+//Delete User by ID
 routes.delete('/:id', (_req, _res) => {
     const deleteId = new OjectId(_req.params.id);
     const results = connect.getCollection().deleteOne({ _id: deleteId },true);
