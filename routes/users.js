@@ -3,10 +3,11 @@ const { response } = require('express');
 const res = require('express/lib/response');
 const connect = require('../db/connect');
 const OjectId = require('mongodb').ObjectId;
+const validation = require('../middleware/validate');
 
 
 //Get all Users
-routes.get('/', (_req, res) => {
+routes.get('/',(_req, res) => {
   const results = connect.getCollection().find();
 
   results.toArray((err, lists) => {
@@ -36,7 +37,7 @@ routes.get('/:id', (req, res) => {
 });
 
 //Post to Users
-routes.post('/', (_req, _res) => {
+routes.post('/', validation.saveContact, (_req, _res) => {
     const user = {
         username: _req.body.username,
         password: _req.body.password
@@ -51,7 +52,7 @@ routes.post('/', (_req, _res) => {
 });
 
 //Replace User by ID
-routes.put('/:id', (_req, _res) => {
+routes.put('/:id', validation.saveContact, (_req, _res) => {
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid contact id to update a User.');
   }
