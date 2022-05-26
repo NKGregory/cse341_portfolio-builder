@@ -1,4 +1,6 @@
 const routes = require('express').Router();
+const { response } = require('express');
+const res = require('express/lib/response');
 const connect = require('../db/connect');
 const OjectId = require('mongodb').ObjectId;
 
@@ -7,20 +9,29 @@ const OjectId = require('mongodb').ObjectId;
 routes.get('/', (_req, res) => {
   const results = connect.getCollection().find();
 
-  results.toArray().then((documents) => {
-    res.status(200).json(documents);
-    console.log('Returned All Users');
+  results.toArray((err, lists) => {
+    if(err) {
+      res.status(400).json({ message: err });
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(lists);
   });
 });
 
 //Get One User
 routes.get('/:id', (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid contact id to find a User.');
+  }
   const userId = new OjectId(req.params.id);
   const results = connect.getCollection().find({ _id: userId });
 
-  results.toArray().then((documents) => {
-    res.status(200).json(documents[0]);
-    console.log(`Returned Contact ${req.params.id}`);
+  results.toArray((err, result) => {
+    if(err) {
+      res.status(400).json({ message: err });
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(result[0]);
   });
 });
 
@@ -31,32 +42,46 @@ routes.post('/', (_req, _res) => {
         password: _req.body.password
     };
     const results = connect.getCollection().insertOne(user);
-    results.then((documents) => {
-        _res.status(201).json(documents);
-    })
+    console.log(results);
+    if(results.acknowledged) {
+      res.status(201).json(results);
+    } else {
+      res.status(500).json(results.error || 'Some error occurred while creating the User.');
+    }
 });
 
 //Replace User by ID
 routes.put('/:id', (_req, _res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid contact id to update a User.');
+  }
     const putId = new OjectId(_req.params.id);
     const user = {
       username: _req.body.username,
       password: _req.body.password
   };
     const results = connect.getCollection().replaceOne({ _id: putId }, user);
-    results.then((documents) => {
-        _res.status(202).json(documents);
-    });
+    console.log(results);
+    if(results.modifiedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(500).json(results.error || 'Some error occurred while updating a User.');
+    }
 });
 
 //Delete User by ID
 routes.delete('/:id', (_req, _res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid contact id to delete a User.');
+  }
     const deleteId = new OjectId(_req.params.id);
     const results = connect.getCollection().deleteOne({ _id: deleteId },true);
-    results.then((documents) => {
-        _res.status(203).json(documents);
-        console.log(`Deleted User Id: ${deleteId}`);
-    });
+    console.log(results);
+    if(results.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(500).json(results.error || 'Some error occurred while deleting a User.');
+    }
 });
 
 module.exports = routes;

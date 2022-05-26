@@ -17,7 +17,11 @@ app
   .use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       next()
-  })
+  });
+  
+process.on('uncaughtException', (err, origin) => {
+  console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
+});
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
