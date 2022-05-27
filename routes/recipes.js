@@ -37,7 +37,7 @@ routes.get('/:id', (req, res) => {
 });
 
 //Post to Recipes
-routes.post('/', validation.saveContact, (_req, _res) => {
+routes.post('/', validation.saveRecipe, (_req, _res) => {
     const recipe = {
         recipe_name: _req.body.recipe_name,
         recipe_instructions: _req.body. recipe_instructions,
@@ -62,7 +62,7 @@ routes.post('/', validation.saveContact, (_req, _res) => {
 });
 
 //Replace Recipe by ID
-routes.put('/:id', validation.saveContact, (_req, _res) => {
+routes.put('/:id', validation.saveRecipe, (_req, _res) => {
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid contact id to update a Recipe.');
   }

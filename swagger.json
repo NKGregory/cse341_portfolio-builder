@@ -18,7 +18,7 @@
         "responses": {}
       }
     },
-    "/users/": {
+    "/recipes/": {
       "get": {
         "description": "",
         "produces": [
@@ -43,10 +43,40 @@
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
+                "recipe_name": {
                   "example": "any"
                 },
-                "password": {
+                "recipe_instructions": {
+                  "example": "any"
+                },
+                "ingredient1": {
+                  "example": "any"
+                },
+                "ingredient2": {
+                  "example": "any"
+                },
+                "ingredient3": {
+                  "example": "any"
+                },
+                "ingredient4": {
+                  "example": "any"
+                },
+                "ingredient5": {
+                  "example": "any"
+                },
+                "ingredient6": {
+                  "example": "any"
+                },
+                "ingredient7": {
+                  "example": "any"
+                },
+                "ingredient8": {
+                  "example": "any"
+                },
+                "ingredient9": {
+                  "example": "any"
+                },
+                "ingredient10": {
                   "example": "any"
                 }
               }
@@ -60,7 +90,7 @@
         }
       }
     },
-    "/users/{id}": {
+    "/recipes/{id}": {
       "get": {
         "description": "",
         "produces": [
@@ -98,10 +128,40 @@
             "schema": {
               "type": "object",
               "properties": {
-                "username": {
+                "recipe_name": {
                   "example": "any"
                 },
-                "password": {
+                "recipe_instructions": {
+                  "example": "any"
+                },
+                "ingredient1": {
+                  "example": "any"
+                },
+                "ingredient2": {
+                  "example": "any"
+                },
+                "ingredient3": {
+                  "example": "any"
+                },
+                "ingredient4": {
+                  "example": "any"
+                },
+                "ingredient5": {
+                  "example": "any"
+                },
+                "ingredient6": {
+                  "example": "any"
+                },
+                "ingredient7": {
+                  "example": "any"
+                },
+                "ingredient8": {
+                  "example": "any"
+                },
+                "ingredient9": {
+                  "example": "any"
+                },
+                "ingredient10": {
                   "example": "any"
                 }
               }
