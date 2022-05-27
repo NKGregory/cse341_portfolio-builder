@@ -21,10 +21,16 @@
     "/users/": {
       "get": {
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -48,8 +54,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "412": {
+            "description": "Precondition Failed"
           }
         }
       }
@@ -57,6 +63,9 @@
     "/users/{id}": {
       "get": {
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -68,6 +77,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -97,8 +109,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
+          "412": {
+            "description": "Precondition Failed"
           }
         }
       },
@@ -112,11 +124,7 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "203": {
-            "description": "Non-Authoritative Information"
-          }
-        }
+        "responses": {}
       }
     }
   }
