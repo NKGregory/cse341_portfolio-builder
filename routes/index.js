@@ -3,6 +3,7 @@ const router = express.Router();
 
 // router.use('/', require('./home'));
 router.use('/', require('./swagger'));
-router.use('/users', require('./users'));
+// router.use('/users', require('./users'));
+router.use('/recipes', require('./recipes'));
 
 module.exports = router;

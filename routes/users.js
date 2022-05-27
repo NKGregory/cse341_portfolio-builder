@@ -22,7 +22,7 @@ routes.get('/',(_req, res) => {
 //Get One User
 routes.get('/:id', (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Must use a valid contact id to find a User.');
+    res.status(400).json('Must use a valid id to find a User.');
   }
   const userId = new OjectId(req.params.id);
   const results = connect.getCollection().find({ _id: userId });
@@ -37,7 +37,7 @@ routes.get('/:id', (req, res) => {
 });
 
 //Post to Users
-routes.post('/', validation.saveContact, (_req, _res) => {
+routes.post('/', validation.saveUser, (_req, _res) => {
     const user = {
         username: _req.body.username,
         password: _req.body.password
@@ -52,9 +52,9 @@ routes.post('/', validation.saveContact, (_req, _res) => {
 });
 
 //Replace User by ID
-routes.put('/:id', validation.saveContact, (_req, _res) => {
+routes.put('/:id', validation.saveUser, (_req, _res) => {
   if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Must use a valid contact id to update a User.');
+    res.status(400).json('Must use a valid id to update a User.');
   }
     const putId = new OjectId(_req.params.id);
     const user = {
@@ -73,7 +73,7 @@ routes.put('/:id', validation.saveContact, (_req, _res) => {
 //Delete User by ID
 routes.delete('/:id', (_req, _res) => {
   if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Must use a valid contact id to delete a User.');
+    res.status(400).json('Must use a valid id to delete a User.');
   }
     const deleteId = new OjectId(_req.params.id);
     const results = connect.getCollection().deleteOne({ _id: deleteId },true);
