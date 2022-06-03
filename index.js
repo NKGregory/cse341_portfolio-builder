@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/profile',requiresAuth(), (req, res) => {
+app.get('/profile', requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
 
@@ -42,10 +42,10 @@ app.get('/profile',requiresAuth(), (req, res) => {
 connect.initDatatbase();
 
 app
-  .use('/api-docs',swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+  .use('/api-docs', requiresAuth(), swaggerUI.serve, swaggerUI.setup(swaggerDocument))
   .use(cors())
   .use(bodyParser.json())
-  .use('/', require('./routes'))
+  .use('/', requiresAuth(), require('./routes'))
   .use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       next()
