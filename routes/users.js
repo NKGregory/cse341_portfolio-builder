@@ -1,14 +1,14 @@
 const routes = require('express').Router();
 const { response } = require('express');
 const res = require('express/lib/response');
-const connect = require('../db/connect');
+const connectUser = require('../db/connectUser');
 const OjectId = require('mongodb').ObjectId;
 const validation = require('../middleware/validate');
 
 
 //Get all Users
 routes.get('/',(_req, res) => {
-  const results = connect.getCollection().find();
+  const results = connectUser.getUserCollection().find();
 
   results.toArray((err, lists) => {
     if(err) {
@@ -25,7 +25,7 @@ routes.get('/:id', (req, res) => {
     res.status(400).json('Must use a valid id to find a User.');
   }
   const userId = new OjectId(req.params.id);
-  const results = connect.getCollection().find({ _id: userId });
+  const results = connectUser.getUserCollection().find({ _id: userId });
 
   results.toArray((err, result) => {
     if(err) {
@@ -42,7 +42,7 @@ routes.post('/', validation.saveUser, (_req, _res) => {
         username: _req.body.username,
         password: _req.body.password
     };
-    const results = connect.getCollection().insertOne(user);
+    const results = connectUser.getUserCollection().insertOne(user);
     console.log(results);
     if(results.acknowledged) {
       res.status(201).json(results);
@@ -61,7 +61,7 @@ routes.put('/:id', validation.saveUser, (_req, _res) => {
       username: _req.body.username,
       password: _req.body.password
   };
-    const results = connect.getCollection().replaceOne({ _id: putId }, user);
+    const results = connectUser.getUserCollection().replaceOne({ _id: putId }, user);
     console.log(results);
     if(results.modifiedCount > 0) {
       res.status(204).send();
@@ -76,7 +76,7 @@ routes.delete('/:id', (_req, _res) => {
     res.status(400).json('Must use a valid id to delete a User.');
   }
     const deleteId = new OjectId(_req.params.id);
-    const results = connect.getCollection().deleteOne({ _id: deleteId },true);
+    const results = connectUser.getUserCollection().deleteOne({ _id: deleteId },true);
     console.log(results);
     if(results.deletedCount > 0) {
       res.status(204).send();
