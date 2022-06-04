@@ -3,7 +3,9 @@ const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
+const session = require('express-session');
 const connect = require ('./db/connect');
+const connectUser = require ('./db/connectUser');
 const swaggerUI = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -37,7 +39,7 @@ app.get('/profile', requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
 
-
+connectUser.initDatatbaseUser();
 
 connect.initDatatbase();
 
