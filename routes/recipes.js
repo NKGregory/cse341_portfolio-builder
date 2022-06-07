@@ -7,7 +7,7 @@ const validation = require('../middleware/validate');
 
 
 //Get all Recipes
-routes.get('/',(_req, res) => {
+routes.get('/', requiresAuth(), (_req, res) => {
   const results = connect.getCollection().find();
 
   results.toArray((err, lists) => {
@@ -20,7 +20,7 @@ routes.get('/',(_req, res) => {
 });
 
 //Get One Recipe
-routes.get('/:id', (req, res) => {
+routes.get('/:id', requiresAuth(), (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid id to find a Recipe.');
   }
@@ -37,7 +37,7 @@ routes.get('/:id', (req, res) => {
 });
 
 //Post to Recipes
-routes.post('/', validation.saveRecipe, (_req, _res) => {
+routes.post('/', requiresAuth(), validation.saveRecipe, (_req, _res) => {
     const recipe = {
         recipe_name: _req.body.recipe_name,
         recipe_instructions: _req.body. recipe_instructions,
@@ -62,7 +62,7 @@ routes.post('/', validation.saveRecipe, (_req, _res) => {
 });
 
 //Replace Recipe by ID
-routes.put('/:id', validation.saveRecipe, (_req, _res) => {
+routes.put('/:id', requiresAuth(), validation.saveRecipe, (_req, _res) => {
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid contact id to update a Recipe.');
   }
@@ -91,7 +91,7 @@ routes.put('/:id', validation.saveRecipe, (_req, _res) => {
 });
 
 //Delete Recipe by ID
-routes.delete('/:id', (_req, _res) => {
+routes.delete('/:id', requiresAuth(), (_req, _res) => {
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid contact id to delete a Recipe.');
   }

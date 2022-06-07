@@ -1,5 +1,6 @@
 const routes = require('express').Router();
 const { response } = require('express');
+const { requiresAuth } = require('express-openid-connect');
 const res = require('express/lib/response');
 const connectUser = require('../db/connectUser');
 const OjectId = require('mongodb').ObjectId;
@@ -7,7 +8,7 @@ const validation = require('../middleware/validate');
 
 
 //Get all Users
-routes.get('/',(_req, res) => {
+routes.get('/', requiresAuth(), (_req, res) => {
   const results = connectUser.getUserCollection().find();
 
   results.toArray((err, lists) => {
@@ -20,7 +21,7 @@ routes.get('/',(_req, res) => {
 });
 
 //Get One User
-routes.get('/:id', (req, res) => {
+routes.get('/:id', requiresAuth(), (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid id to find a User.');
   }
@@ -37,7 +38,7 @@ routes.get('/:id', (req, res) => {
 });
 
 //Post to Users
-routes.post('/', validation.saveUser, (_req, _res) => {
+routes.post('/', requiresAuth(), validation.saveUser, (_req, _res) => {
     const user = {
         username: _req.body.username,
         password: _req.body.password
@@ -52,7 +53,7 @@ routes.post('/', validation.saveUser, (_req, _res) => {
 });
 
 //Replace User by ID
-routes.put('/:id', validation.saveUser, (_req, _res) => {
+routes.put('/:id', requiresAuth(), validation.saveUser, (_req, _res) => {
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid id to update a User.');
   }
@@ -71,7 +72,7 @@ routes.put('/:id', validation.saveUser, (_req, _res) => {
 });
 
 //Delete User by ID
-routes.delete('/:id', (_req, _res) => {
+routes.delete('/:id', requiresAuth(), (_req, _res) => {
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid id to delete a User.');
   }

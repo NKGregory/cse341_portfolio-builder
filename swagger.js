@@ -9,6 +9,12 @@ const doc = {
   // schemes: ['http'],
   host: 'cse341-ngregory-portfolio.herokuapp.com',
   schemes: ['https'],
+  // securityDefinitions: {
+  //   "oauth": {
+  //       "type": "oauth2",
+  //       "authorizationUrl": "http://api.example.com/api/auth",
+  //   }
+  // },
 };
 
 const outputFile = './swagger.json';

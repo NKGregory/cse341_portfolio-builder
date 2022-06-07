@@ -3,7 +3,6 @@ const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
-const session = require('express-session');
 const connect = require ('./db/connect');
 const connectUser = require ('./db/connectUser');
 const swaggerUI = require('swagger-ui-express');
@@ -44,10 +43,10 @@ connectUser.initDatatbaseUser();
 connect.initDatatbase();
 
 app
-  .use('/api-docs', requiresAuth(), swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+  .use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
   .use(cors())
   .use(bodyParser.json())
-  .use('/', requiresAuth(), require('./routes'))
+  .use('/', require('./routes'))
   .use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
       next()
