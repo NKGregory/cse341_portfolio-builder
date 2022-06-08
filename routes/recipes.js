@@ -1,5 +1,6 @@
 const routes = require('express').Router();
 const { response } = require('express');
+const { requiresAuth } = require('express-openid-connect');
 const res = require('express/lib/response');
 const connect = require('../db/connect');
 const OjectId = require('mongodb').ObjectId;
