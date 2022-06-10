@@ -22,7 +22,7 @@ routes.get('/', requiresAuth(), (_req, res) => {
 
 //Get One User
 routes.get('/:id', requiresAuth(), (req, res) => {
-  if (!ObjectId.isValid(req.params.id)) {
+  if (!OjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid id to find a User.');
   }
   const userId = new OjectId(req.params.id);
@@ -54,7 +54,7 @@ routes.post('/', requiresAuth(), validation.saveUser, (_req, _res) => {
 
 //Replace User by ID
 routes.put('/:id', requiresAuth(), validation.saveUser, (_req, _res) => {
-  if (!ObjectId.isValid(req.params.id)) {
+  if (!OjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid id to update a User.');
   }
     const putId = new OjectId(_req.params.id);
@@ -73,7 +73,7 @@ routes.put('/:id', requiresAuth(), validation.saveUser, (_req, _res) => {
 
 //Delete User by ID
 routes.delete('/:id', requiresAuth(), (_req, _res) => {
-  if (!ObjectId.isValid(req.params.id)) {
+  if (!OjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid id to delete a User.');
   }
     const deleteId = new OjectId(_req.params.id);

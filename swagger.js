@@ -5,10 +5,10 @@ const doc = {
     title: 'Recipes',
     description: 'Recipe Share Site API',
   },
-  // host: 'localhost:3000',
-  // schemes: ['http'],
-  host: 'cse341-ngregory-portfolio.herokuapp.com',
-  schemes: ['https'],
+  host: 'localhost:3000',
+  schemes: ['http'],
+  // host: 'cse341-ngregory-portfolio.herokuapp.com',
+  // schemes: ['https'],
   // securityDefinitions: {
   //   "oauth": {
   //       "type": "oauth2",

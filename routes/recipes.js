@@ -22,7 +22,7 @@ routes.get('/', requiresAuth(), (_req, res) => {
 
 //Get One Recipe
 routes.get('/:id', requiresAuth(), (req, res) => {
-  if (!ObjectId.isValid(req.params.id)) {
+  if (!OjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid id to find a Recipe.');
   }
   const recipeId = new OjectId(req.params.id);
@@ -64,7 +64,7 @@ routes.post('/', requiresAuth(), validation.saveRecipe, (_req, _res) => {
 
 //Replace Recipe by ID
 routes.put('/:id', requiresAuth(), validation.saveRecipe, (_req, _res) => {
-  if (!ObjectId.isValid(req.params.id)) {
+  if (!OjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid contact id to update a Recipe.');
   }
     const putId = new OjectId(_req.params.id);
@@ -93,7 +93,7 @@ routes.put('/:id', requiresAuth(), validation.saveRecipe, (_req, _res) => {
 
 //Delete Recipe by ID
 routes.delete('/:id', requiresAuth(), (_req, _res) => {
-  if (!ObjectId.isValid(req.params.id)) {
+  if (!OjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid contact id to delete a Recipe.');
   }
     const deleteId = new OjectId(_req.params.id);
