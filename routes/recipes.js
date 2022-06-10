@@ -56,16 +56,16 @@ routes.post('/', requiresAuth(), validation.saveRecipe, (_req, _res) => {
     const results = connect.getCollection().insertOne(recipe);
     console.log(results);
     if(results.acknowledged) {
-      res.status(201).json(results);
+      _res.status(201).json(results);
     } else {
-      res.status(500).json(results.error || 'Some error occurred while creating the Recipe.');
+      _res.status(500).json(results.error || 'Some error occurred while creating the Recipe.');
     }
 });
 
 //Replace Recipe by ID
 routes.put('/:id', requiresAuth(), validation.saveRecipe, (_req, _res) => {
   if (!OjectId.isValid(_req.params.id)) {
-    res.status(400).json('Must use a valid contact id to update a Recipe.');
+    _res.status(400).json('Must use a valid contact id to update a Recipe.');
   }
     const putId = new OjectId(_req.params.id);
     const recipe = {
@@ -85,24 +85,24 @@ routes.put('/:id', requiresAuth(), validation.saveRecipe, (_req, _res) => {
     const results = connect.getCollection().replaceOne({ _id: putId }, recipe);
     console.log(results);
     if(results.modifiedCount > 0) {
-      res.status(204).send();
+      _res.status(204).send();
     } else {
-      res.status(500).json(results.error || 'Some error occurred while updating a Recipe.');
+      _res.status(500).json(results.error || 'Some error occurred while updating a Recipe.');
     }
 });
 
 //Delete Recipe by ID
 routes.delete('/:id', requiresAuth(), (_req, _res) => {
   if (!OjectId.isValid(_req.params.id)) {
-    res.status(400).json('Must use a valid contact id to delete a Recipe.');
+    _res.status(400).json('Must use a valid contact id to delete a Recipe.');
   }
     const deleteId = new OjectId(_req.params.id);
     const results = connect.getCollection().deleteOne({ _id: deleteId },true);
     console.log(results);
     if(results.deletedCount > 0) {
-      res.status(204).send();
+      _res.status(204).send();
     } else {
-      res.status(500).json(results.error || 'Some error occurred while deleting the Recipe.');
+      _res.status(500).json(results.error || 'Some error occurred while deleting the Recipe.');
     }
 });
 

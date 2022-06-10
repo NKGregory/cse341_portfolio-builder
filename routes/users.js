@@ -46,9 +46,9 @@ routes.post('/', requiresAuth(), validation.saveUser, (_req, _res) => {
     const results = connectUser.getUserCollection().insertOne(user);
     console.log(results);
     if(results.acknowledged) {
-      res.status(201).json(results);
+      _res.status(201).json(results);
     } else {
-      res.status(500).json(results.error || 'Some error occurred while creating the User.');
+      _res.status(500).json(results.error || 'Some error occurred while creating the User.');
     }
 });
 
@@ -65,9 +65,9 @@ routes.put('/:id', requiresAuth(), validation.saveUser, (_req, _res) => {
     const results = connectUser.getUserCollection().replaceOne({ _id: putId }, user);
     console.log(results);
     if(results.modifiedCount > 0) {
-      res.status(204).send();
+      _res.status(204).send();
     } else {
-      res.status(500).json(results.error || 'Some error occurred while updating a User.');
+      _res.status(500).json(results.error || 'Some error occurred while updating a User.');
     }
 });
 
@@ -80,9 +80,9 @@ routes.delete('/:id', requiresAuth(), (_req, _res) => {
     const results = connectUser.getUserCollection().deleteOne({ _id: deleteId },true);
     console.log(results);
     if(results.deletedCount > 0) {
-      res.status(204).send();
+      _res.status(204).send();
     } else {
-      res.status(500).json(results.error || 'Some error occurred while deleting a User.');
+      _res.status(500).json(results.error || 'Some error occurred while deleting a User.');
     }
 });
 
