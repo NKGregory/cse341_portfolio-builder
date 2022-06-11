@@ -82,13 +82,15 @@ routes.put('/:id', requiresAuth(), validation.saveRecipe, (_req, _res) => {
       ingredient9: _req.body.ingredient9,
       ingredient10: _req.body.ingredient10,
   };
-    const results = connect.getCollection().replaceOne({ _id: putId }, recipe);
-    console.log(results);
-    if(results.modifiedCount > 0) {
-      _res.status(204).send();
-    } else {
-      _res.status(500).json(results.error || 'Some error occurred while updating a Recipe.');
-    }
+    connect.getCollection().replaceOne({ _id: putId }, recipe)
+    .then(function(count) {
+      console.log(count)
+      if (count.modifiedCount > 0) {
+        _res.status(204).send();
+      } else {
+        _res.status(500).json(count.error || 'Some error occurred while updating a Recipe.');
+      }
+    });
 });
 
 //Delete Recipe by ID
@@ -97,13 +99,16 @@ routes.delete('/:id', requiresAuth(), (_req, _res) => {
     _res.status(400).json('Must use a valid contact id to delete a Recipe.');
   }
     const deleteId = new OjectId(_req.params.id);
-    const results = connect.getCollection().deleteOne({ _id: deleteId },true);
-    console.log(results);
-    if(results.deletedCount > 0) {
-      _res.status(204).send();
-    } else {
-      _res.status(500).json(results.error || 'Some error occurred while deleting the Recipe.');
-    }
+    connect.getCollection().deleteOne({ _id: deleteId },true)
+    .then(function(count) {
+      console.log(count)
+      if (count.deletedCount > 0) {
+        _res.status(205).send();
+      } else {
+        _res.status(500).json(count.error || 'Some error occurred while deleting a Recipe.');
+      }
+    });
 });
+
 
 module.exports = routes;
