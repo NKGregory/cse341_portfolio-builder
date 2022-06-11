@@ -43,13 +43,14 @@ routes.post('/', requiresAuth(), validation.saveUser, (_req, _res) => {
         username: _req.body.username,
         password: _req.body.password
     };
-    const results = connectUser.getUserCollection().insertOne(user);
-    console.log(results);
-    if(results.acknowledged) {
-      _res.status(201).json(results);
-    } else {
-      _res.status(500).json(results.error || 'Some error occurred while creating the User.');
-    }
+    connectUser.getUserCollection().insertOne(user)
+    .then(function(count) {
+      if(count.acknowledged) {
+        _res.status(201).json(count);
+      } else {
+        _res.status(500).json(count.error || 'Some error occurred while creating the User.');
+      }
+    });
 });
 
 //Replace User by ID

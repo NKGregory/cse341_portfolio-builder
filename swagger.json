@@ -137,8 +137,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "205": {
+            "description": "Reset Content"
           },
           "500": {
             "description": "Internal Server Error"
@@ -328,8 +328,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "205": {
+            "description": "Reset Content"
           },
           "400": {
             "description": "Bad Request"

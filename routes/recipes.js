@@ -53,13 +53,14 @@ routes.post('/', requiresAuth(), validation.saveRecipe, (_req, _res) => {
         ingredient9: _req.body.ingredient9,
         ingredient10: _req.body.ingredient10,
     };
-    const results = connect.getCollection().insertOne(recipe);
-    console.log(results);
-    if(results.acknowledged) {
-      _res.status(201).json(results);
-    } else {
-      _res.status(500).json(results.error || 'Some error occurred while creating the Recipe.');
-    }
+    connect.getCollection().insertOne(recipe)
+    .then(function(count) {
+      if(count.acknowledged) {
+        _res.status(201).json(count);
+      } else {
+        _res.status(500).json(count.error || 'Some error occurred while creating the Recipe.');
+      }
+    });
 });
 
 //Replace Recipe by ID
