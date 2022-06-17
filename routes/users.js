@@ -17,7 +17,7 @@ routes.get('/', requiresAuth(), (_req, res) => {
     }
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
-    res.status(401),'Not Logged in';
+    res.status(401);
   });
 });
 
@@ -35,6 +35,7 @@ routes.get('/:id', requiresAuth(), (req, res) => {
     }
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result[0]);
+    res.status(401);
   });
 });
 
@@ -50,6 +51,7 @@ routes.post('/', requiresAuth(), validation.saveUser, (_req, _res) => {
         _res.status(201).json(count);
       } else {
         _res.status(500).json(count.error || 'Some error occurred while creating the User.');
+        _res.status(401);
       }
     });
 });
@@ -71,6 +73,7 @@ routes.put('/:id', requiresAuth(), validation.saveUser, (_req, _res) => {
         _res.status(204).send();
       } else {
         _res.status(500).json(count.error || 'Some error occurred while updating a User.');
+        _res.status(401);
       }
     });
 });
@@ -88,6 +91,7 @@ routes.delete('/:id', requiresAuth(), (_req, _res) => {
         _res.status(205).send();
       } else {
         _res.status(500).json(count.error || 'Some error occurred while deleting a User.');
+        _res.status(401);
       }
     });
 });
